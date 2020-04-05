@@ -16,7 +16,10 @@ class IndexView(TemplateView):
         episodes += res_json['results']
 
         for page in range(2, pages+1):
-            response = requests.get('https://rickandmortyapi.com/api/episode/?page={}'.format(page))
+            response = requests.get(
+                'https://rickandmortyapi.com/api/episode/?page={}'
+                .format(page)
+            )
             res_json = response.json()
             episodes += res_json['results']
 
@@ -121,5 +124,32 @@ class LocationView(TemplateView):
             )
 
         context['residents'] = residents
+
+        return context
+
+
+class SearchView(TemplateView):
+    template_name = 'search/results.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        search_str = self.request.GET.get('search_str')
+
+        epi_response = requests.get(
+            'https://rickandmortyapi.com/api/episode/?name={}'
+            .format(search_str)
+        ).json()
+        char_response = requests.get(
+            'https://rickandmortyapi.com/api/character/?name={}'
+            .format(search_str)
+        ).json()
+        loc_response = requests.get(
+            'https://rickandmortyapi.com/api/location/?name={}'
+            .format(search_str)
+        ).json()
+
+        context['episodes'] = epi_response['results'] if 'results' in epi_response else []
+        context['characters'] = char_response['results'] if 'results' in char_response else []
+        context['locations'] = loc_response['results'] if 'results' in loc_response else []
 
         return context
