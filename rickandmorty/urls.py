@@ -1,6 +1,10 @@
 from django.urls import path
 
-from .views import IndexView, EpisodeView, CharacterView, LocationView, SearchView
+from .views import IndexView
+from .views import EpisodeView
+from .views import CharacterView
+from .views import LocationView
+from .views import SearchView
 
 urlpatterns = [
     path('', IndexView.as_view(), name='episode_list'),

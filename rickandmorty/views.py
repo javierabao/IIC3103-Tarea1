@@ -71,12 +71,16 @@ class CharacterView(TemplateView):
         context['character'] = character
 
         context['origin'] = {
-            "id": int(character['origin']['url'].split("/")[-1]) if character['origin']['url'].split("/")[-1] else '',
+            "id": int(
+                character['origin']['url'].split("/")[-1]
+            ) if character['origin']['url'].split("/")[-1] else '',
             "name": character['origin']['name']
         }
 
         context['location'] = {
-            "id": int(character['location']['url'].split("/")[-1]) if character['location']['url'].split("/")[-1] else '',
+            "id": int(
+                character['location']['url'].split("/")[-1]
+            ) if character['location']['url'].split("/")[-1] else '',
             "name": character['location']['name']
         }
 
@@ -148,8 +152,17 @@ class SearchView(TemplateView):
             .format(search_str)
         ).json()
 
-        context['episodes'] = epi_response['results'] if 'results' in epi_response else []
-        context['characters'] = char_response['results'] if 'results' in char_response else []
-        context['locations'] = loc_response['results'] if 'results' in loc_response else []
+        context['episodes'] = (
+            epi_response['results'] if 'results' in epi_response
+            else []
+        )
+        context['characters'] = (
+            char_response['results'] if 'results' in char_response
+            else []
+        )
+        context['locations'] = (
+            loc_response['results'] if 'results' in loc_response
+            else []
+        )
 
         return context
