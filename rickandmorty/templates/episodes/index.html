@@ -1,0 +1,22 @@
+<h1>Rick and Morty: List of Episodes</h1> 
+
+{% block content %}
+  <table>
+    <tr>
+      <th>Episode</th>
+      <th>Name</th>
+      <th>Date</th>
+    </tr>
+    {% for episode in episodes %}
+      <tr>
+        <td>
+          <a href="{% url 'episode_detail' episode.id%}">
+            {{ episode.episode }}
+          </a>
+        </td>
+        <td>{{ episode.name }}</td>
+        <td>{{ episode.air_date }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
