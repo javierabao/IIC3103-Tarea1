@@ -9,6 +9,9 @@ flake8 = "*"
 [packages]
 django = "*"
 requests = "*"
+gunicorn = "*"
+psycopg2 = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.6"
