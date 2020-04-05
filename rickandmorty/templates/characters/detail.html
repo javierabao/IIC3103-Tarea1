@@ -1,0 +1,62 @@
+<h1>Character: {{ character.name }}</h1> 
+
+<form action="{% url 'search_results' %}" method="get">
+    <input name="search_str" type="text" placeholder="Search...">
+</form>  
+
+{% block content %}
+  <table>
+    <tr>
+        <th>Name</th>
+        <td>{{character.name}}</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>{{character.status}}</td>
+    </tr>
+    <tr>
+        <th>Species</th>
+        <td>{{character.species}}</td>
+    </tr>
+    <tr>
+        <th>Type</th>
+        <td>{{character.type}}</td>
+    </tr>
+    <tr>
+        <th>Gender</th>
+        <td>{{character.gender}}</td>
+    </tr>
+    <tr>
+        <th>Origin</th>
+        {% if origin.id %}
+            <td><a href="{% url 'location_detail' origin.id%}">{{origin.name}}</a></td>
+        {% else %}
+            <td>{{origin.name}}</td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Location</th>
+        {% if location.id %}
+            <td><a href="{% url 'location_detail' location.id%}">{{location.name}}</a></td>
+        {% else %}
+            <td>{{location.name}}</td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Image</th>
+        <td><img src="{{character.image}}"/></td>
+    </tr>
+    <tr>
+        <th>Episodes</th>
+        <td>
+            <ul>
+                {% for episode in episodes %}
+                    <li><a href="{% url 'episode_detail' episode.id%}">{{episode.episode}}: {{episode.name}}</a></li>
+                {% endfor %}
+            </ul>
+        </td>
+        
+    </tr>
+
+  </table>
+{% endblock %}
