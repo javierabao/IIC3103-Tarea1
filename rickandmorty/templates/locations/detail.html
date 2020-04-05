@@ -1,0 +1,29 @@
+<h1>Location: {{ location.name }}</h1> 
+
+{% block content %}
+  <table>
+    <tr>
+        <th>Name</th>
+        <td>{{location.name}}</td>
+    </tr>
+    <tr>
+        <th>Type</th>
+        <td>{{location.type}}</td>
+    </tr>
+    <tr>
+        <th>Dimension</th>
+        <td>{{location.dimension}}</td>
+    </tr>
+    <tr>
+        <th>Residents</th>
+        <td>
+            <ul>
+                {% for resident in residents %}
+                    <li><a href="{% url 'character_detail' resident.id%}">{{resident.name}}</a></li>
+                {% endfor %}
+            </ul>
+        </td>
+        
+    </tr>
+  </table>
+{% endblock %}

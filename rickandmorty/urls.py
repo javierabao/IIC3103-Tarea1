@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import IndexView, EpisodeView, CharacterView
+from .views import IndexView, EpisodeView, CharacterView, LocationView
 
 urlpatterns = [
     path('', IndexView.as_view(), name='episode_list'),
@@ -13,5 +13,10 @@ urlpatterns = [
         'characters/<int:character>/',
         CharacterView.as_view(),
         name='character_detail'
+    ),
+    path(
+        'locations/<int:location>/',
+        LocationView.as_view(),
+        name='location_detail'
     )
 ]

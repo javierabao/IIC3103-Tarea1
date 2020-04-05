@@ -93,3 +93,33 @@ class CharacterView(TemplateView):
         context['episodes'] = episodes
 
         return context
+
+
+class LocationView(TemplateView):
+    template_name = 'locations/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        location_id = kwargs['location']
+        response = requests.get(
+            'https://rickandmortyapi.com/api/location/{}'.format(location_id)
+        )
+        location = response.json()
+
+        context['location'] = location
+
+        residents = []
+
+        for resident_url in location['residents']:
+            res_response = requests.get(resident_url)
+            resident = res_response.json()
+            residents.append(
+                {
+                    "name": resident['name'],
+                    "id": resident["id"]
+                }
+            )
+
+        context['residents'] = residents
+
+        return context

@@ -1,0 +1,4 @@
+/.vscode
+/tarea1/__pycache__
+/rickandmorty/__pycache__
+db.sqlite3
