@@ -8,7 +8,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        response = requests.get('https://rickandmortyapi.com/api/episode')
+        response = requests.get('https://integracion-rick-morty-api.herokuapp.com/api/episode')
         res_json = response.json()
         pages = res_json['info']['pages']
 
@@ -17,7 +17,7 @@ class IndexView(TemplateView):
 
         for page in range(2, pages+1):
             response = requests.get(
-                'https://rickandmortyapi.com/api/episode/?page={}'
+                'https://integracion-rick-morty-api.herokuapp.com/api/episode/?page={}'
                 .format(page)
             )
             res_json = response.json()
@@ -35,7 +35,8 @@ class EpisodeView(TemplateView):
         context = super().get_context_data(**kwargs)
         episode_id = kwargs['episode']
         response = requests.get(
-            'https://rickandmortyapi.com/api/episode/{}'.format(episode_id)
+            'https://integracion-rick-morty-api.herokuapp.com/api/episode/{}'
+            .format(episode_id)
         )
         episode = response.json()
 
@@ -64,7 +65,8 @@ class CharacterView(TemplateView):
         context = super().get_context_data(**kwargs)
         character_id = kwargs['character']
         response = requests.get(
-            'https://rickandmortyapi.com/api/character/{}'.format(character_id)
+            'https://integracion-rick-morty-api.herokuapp.com/api/character/{}'
+            .format(character_id)
         )
         character = response.json()
 
@@ -109,7 +111,8 @@ class LocationView(TemplateView):
         context = super().get_context_data(**kwargs)
         location_id = kwargs['location']
         response = requests.get(
-            'https://rickandmortyapi.com/api/location/{}'.format(location_id)
+            'https://integracion-rick-morty-api.herokuapp.com/api/location/{}'
+            .format(location_id)
         )
         location = response.json()
 
@@ -140,15 +143,15 @@ class SearchView(TemplateView):
         search_str = self.request.GET.get('search_str')
 
         epi_response = requests.get(
-            'https://rickandmortyapi.com/api/episode/?name={}'
+            'https://integracion-rick-morty-api.herokuapp.com/api/episode/?name={}'
             .format(search_str)
         ).json()
         char_response = requests.get(
-            'https://rickandmortyapi.com/api/character/?name={}'
+            'https://integracion-rick-morty-api.herokuapp.com/api/character/?name={}'
             .format(search_str)
         ).json()
         loc_response = requests.get(
-            'https://rickandmortyapi.com/api/location/?name={}'
+            'https://integracion-rick-morty-api.herokuapp.com/api/location/?name={}'
             .format(search_str)
         ).json()
 
